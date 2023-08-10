@@ -54,9 +54,22 @@ document.getElementById("playpause").onclick = (e) =>
 document.getElementById("sound").onclick = (e) =>
   (vologram.elVideo.muted = !vologram.elVideo.muted);
 
+let pathname = window.location.pathname; // Get the current pathname
+let vologramUrl = ""; // Initialize the vologram URL
+
+if (pathname.includes("left")) {
+  vologramUrl = "assets/left_1690983019490_ld"; // Set the URL for "left" pathname
+} else if (pathname.includes("right")) {
+  vologramUrl = "assets/right_1690983080648_ld"; // Set the URL for "right" pathname
+} else if (pathname.includes("head")) {
+  vologramUrl = "assets/head_1690983148857_ld"; // Set the URL for "head" pathname
+} else {
+  vologramUrl = "assets/left_1690983019490_ld"; // Default URL if no specific pathname matches
+}
+
 // let url = "assets/1690983019490_ld";
-let vologram = new Vologram("assets/1690983019490_ld", updateLoading);
-scene.add(vologram);
+let vologram = new Vologram(vologramUrl, updateLoading);
+vologramUrl && scene.add(vologram);
 
 function animate() {
   requestAnimationFrame(animate);
