@@ -2,6 +2,11 @@ import { Vologram } from "volograms-js";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
+// import volUrl from "@/assets/1690983019490_ld?url";
+
+// const x = import.meta.glob("@/assets/1690983019490_ld?url");
+// console.log(volUrl);
+
 // setup render, scene, light, orbitcontrol
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -30,11 +35,13 @@ const updateLoading = (p) => {
   const el = document.getElementById("loading");
   el.innerText = Math.round(p * 100) + "%";
 
+  vologram.elVideo.play();
+
   if (p === 1.0) {
     //when loaded/100%
     // Play and unmute when clicking on canvas (because of Chrome policy; cannot be autoplay)
     renderer.domElement.onclick = (e) => {
-      vologram.elVideo.play();
+      // vologram.elVideo.play();
       vologram.elVideo.muted = true;
       renderer.domElement.onclick = null;
     };
@@ -47,8 +54,8 @@ document.getElementById("playpause").onclick = (e) =>
 document.getElementById("sound").onclick = (e) =>
   (vologram.elVideo.muted = !vologram.elVideo.muted);
 
-let url = "assets/1690983019490_ld";
-let vologram = new Vologram(url, updateLoading);
+// let url = "assets/1690983019490_ld";
+let vologram = new Vologram("assets/1690983019490_ld", updateLoading);
 scene.add(vologram);
 
 function animate() {
