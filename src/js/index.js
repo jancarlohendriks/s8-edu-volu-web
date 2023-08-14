@@ -31,17 +31,18 @@ scene.add(new THREE.AxesHelper(1));
 scene.add(new THREE.GridHelper(10, 10));
 
 // as a volograms takes time to be downloaded, display loading information
-const updateLoading = (p) => {
+const updateLoading = (p, play) => {
   const el = document.getElementById("loading");
   el.innerText = Math.round(p * 100) + "%";
 
-  vologram.elVideo.play();
+  if (window.location.hash) {
+    vologram.elVideo.play();
+  }
 
   if (p === 1.0) {
     //when loaded/100%
     // Play and unmute when clicking on canvas (because of Chrome policy; cannot be autoplay)
     renderer.domElement.onclick = (e) => {
-      // vologram.elVideo.play();
       vologram.elVideo.muted = true;
       renderer.domElement.onclick = null;
     };
@@ -54,14 +55,15 @@ document.getElementById("playpause").onclick = (e) =>
 document.getElementById("sound").onclick = (e) =>
   (vologram.elVideo.muted = !vologram.elVideo.muted);
 
-let pathname = window.location.pathname; // Get the current pathname
 let vologramUrl = ""; // Initialize the vologram URL
 
-if (pathname.includes("left")) {
+if (window.location.hash.includes("static")) {
   vologramUrl = "assets/left_1690983019490_ld"; // Set the URL for "left" pathname
-} else if (pathname.includes("right")) {
+} else if (window.location.hash.includes("left")) {
+  vologramUrl = "assets/left_1690983019490_ld"; // Set the URL for "left" pathname
+} else if (window.location.hash.includes("right")) {
   vologramUrl = "assets/right_1690983080648_ld"; // Set the URL for "right" pathname
-} else if (pathname.includes("head")) {
+} else if (window.location.hash.includes("head")) {
   vologramUrl = "assets/head_1690983148857_ld"; // Set the URL for "head" pathname
 } else {
   vologramUrl = "assets/left_1690983019490_ld"; // Default URL if no specific pathname matches
