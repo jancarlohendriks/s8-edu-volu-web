@@ -2,11 +2,6 @@ import { Vologram } from "volograms-js";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-// import volUrl from "@/assets/1690983019490_ld?url";
-
-// const x = import.meta.glob("@/assets/1690983019490_ld?url");
-// console.log(volUrl);
-
 // setup render, scene, light, orbitcontrol
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
